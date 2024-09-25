@@ -23,9 +23,8 @@ class Login extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.senha)
-      .then((retorno) => {
+      .then(() => {
         alert("Usuário logado com sucesso");
-        window.localStorage.setItem("uid", retorno.user.uid);
         window.location.href = "/";
       })
       .catch((error) => {
