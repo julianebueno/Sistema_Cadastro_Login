@@ -1,48 +1,73 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Layout from "../../components/Layout";
+import firebase from "../../Firebase";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      senha: "",
+    };
+    this.acessar = this.acessar.bind(this);
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
+  async acessar() {
+    for (const key in this.state) {
+      if (this.state[key] === "") {
+        alert("Preencha todos os campos");
+        return;
+      }
+    }
 
-  return (
-    <Layout>
-      <div className="divCentralizada">
-        <h2>LOGIN</h2>
-        <form
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.senha)
+      .then((retorno) => {
+        alert("Usuário logado com sucesso");
+        window.localStorage.setItem("uid", retorno.user.uid);
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  render() {
+    return (
+      <Layout>
+        <div className="divCentralizada">
+          <h2>LOGIN</h2>
+          {/* <form
           onSubmit={handleSubmit}
           style={{ display: "flex", flexDirection: "column", width: "300px" }}
-        >
+        > */}
           <label>
             Email:
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              id="email"
+              name="email"
+              value={this.state.email}
+              onChange={(e) => this.setState({ email: e.target.value })}
             />
           </label>
           <label>
             Password:
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              id="senha"
+              name="senha"
+              value={this.state.senha}
+              onChange={(e) => this.setState({ senha: e.target.value })}
             />
           </label>
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    </Layout>
-  );
-};
+          <button onClick={this.acessar}>Acessar</button>
+          {/* </form> */}
+        </div>
+      </Layout>
+    );
+  }
+}
 
 export default Login;
