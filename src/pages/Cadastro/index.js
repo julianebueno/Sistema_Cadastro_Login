@@ -23,17 +23,31 @@ class Cadastro extends Component {
       }
     }
 
-    await firebase.firestore().collection("usuarios").add({
-      email: this.state.email,
-      senha: this.state.senha,
-      nome: this.state.nome,
-      sobrenome: this.state.sobrenome,
-      nascimento: this.state.nascimento,
-    });
+    // TODO: Validar dados
 
-    for (const key in this.state) {
-      this.setState({ [key]: "" });
-    }
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.senha)
+      .then(async (retorno) => {
+        await firebase
+          .firestore()
+          .collection("usuarios")
+          .doc(retorno.user.uid)
+          .set({
+            nome: this.state.nome,
+            sobrenome: this.state.sobrenome,
+            nascimento: this.state.nascimento,
+          });
+
+        alert("Usuário cadastrado com sucesso");
+
+        for (const key in this.state) {
+          this.setState({ [key]: "" });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   render() {
