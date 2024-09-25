@@ -1,17 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <header>
-      <a className="linkHeader" href="/">
+      <Link className="linkHeader" to="/">
         Principal
-      </a>
-      <a className="linkHeader" href="/cadastro">
+      </Link>
+      <Link className="linkHeader" to="/cadastro">
         Cadastro
-      </a>
-      <a className="linkHeader" href="/login">
+      </Link>
+      <Link className="linkHeader" to="/login">
         Login
-      </a>
+      </Link>
     </header>
   );
 }
