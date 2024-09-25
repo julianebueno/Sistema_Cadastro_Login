@@ -1,67 +1,103 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import Layout from "../../components/Layout";
+import firebase from "../../Firebase";
 
-const Cadastro = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+class Cadastro extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      senha: "",
+      nome: "",
+      sobrenome: "",
+      nascimento: "",
+    };
+    this.gravar = this.gravar.bind(this);
+  }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
+  async gravar() {
+    for (const key in this.state) {
+      if (this.state[key] === "") {
+        alert("Preencha todos os campos");
+        return;
+      }
+    }
+
+    await firebase.firestore().collection("usuarios").add({
+      email: this.state.email,
+      senha: this.state.senha,
+      nome: this.state.nome,
+      sobrenome: this.state.sobrenome,
+      nascimento: this.state.nascimento,
     });
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form data submitted:", formData);
-  };
+    for (const key in this.state) {
+      this.setState({ [key]: "" });
+    }
+  }
 
-  return (
-    <Layout>
-      <div className="divCentralizada">
-        <h2>CADASTRO</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
+  render() {
+    return (
+      <Layout>
+        <div className="divCentralizada">
+          <h2>CADASTRO</h2>
+          {/* <form onSubmit={this.gravar}> */}
           <div>
             <label htmlFor="email">Email:</label>
             <input
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              value={this.state.email}
+              onChange={(e) => this.setState({ email: e.target.value })}
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="senha">Senha:</label>
             <input
               type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
+              id="senha"
+              name="senha"
+              value={this.state.senha}
+              onChange={(e) => this.setState({ senha: e.target.value })}
             />
           </div>
-          <button type="submit">Register</button>
-        </form>
-      </div>
-    </Layout>
-  );
-};
+          <div>
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              value={this.state.nome}
+              onChange={(e) => this.setState({ nome: e.target.value })}
+            />
+          </div>
+          <div>
+            <label htmlFor="sobrenome">Sobrenome:</label>
+            <input
+              type="text"
+              id="sobrenome"
+              name="sobrenome"
+              value={this.state.sobrenome}
+              onChange={(e) => this.setState({ sobrenome: e.target.value })}
+            />
+          </div>
+          <div>
+            <label htmlFor="nascimento">Data de Nascimento:</label>
+            <input
+              type="date"
+              id="nascimento"
+              name="nascimento"
+              value={this.state.nascimento}
+              onChange={(e) => this.setState({ nascimento: e.target.value })}
+            />
+          </div>
+          <button onClick={this.gravar}>Cadastrar</button>
+          {/* </form> */}
+        </div>
+      </Layout>
+    );
+  }
+}
 
 export default Cadastro;
