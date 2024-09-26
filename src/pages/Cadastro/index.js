@@ -47,6 +47,13 @@ class Cadastro extends Component {
       })
       .catch((error) => {
         console.error(error);
+        if (error.code === "auth/invalid-email") {
+          alert("Email inválido");
+        } else if (error.code === "auth/email-already-in-use") {
+          alert("Email já cadastrado");
+        } else { 
+          alert("Erro ao cadastrar usuário");
+        }
       });
   }
 
