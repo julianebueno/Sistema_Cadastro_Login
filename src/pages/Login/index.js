@@ -24,7 +24,7 @@ class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.senha)
       .then((retorno) => {
-        if (!retorno.user.emailVerified) {
+        if (!retorno.user) {
           alert("Email não cadastrado");
           return;
         }
