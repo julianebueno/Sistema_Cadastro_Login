@@ -51,7 +51,7 @@ class Principal extends Component {
       <Layout>
         <h2>PRINCIPAL</h2>
         <div className="divCentralizada">
-          <p>Seja bem-vindo(a) à página principal!</p>
+          <p className="saudacaoPrincipal">Seja bem-vindo(a) à página principal!</p>
           <div className="containerPrincipal">
             {this.state.nome &&
               this.state.sobrenome &&
