@@ -23,7 +23,11 @@ class Login extends Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.senha)
-      .then(() => {
+      .then((retorno) => {
+        if (!retorno.user.emailVerified) {
+          alert("Email não cadastrado");
+          return;
+        }
         alert("Usuário logado com sucesso");
         window.location.href = "/";
       })
