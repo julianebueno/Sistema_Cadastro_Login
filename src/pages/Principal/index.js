@@ -29,8 +29,6 @@ class Principal extends Component {
               nascimento: retorno.data().nascimento,
             });
           });
-      } else {
-        console.log("Usuário não logado");
       }
     });
   }
