@@ -45,7 +45,43 @@ footer {
   color: rgb(255, 0, 132);
 }
 
+/* ----------------------------------------------- tag padroes */
+
+label {
+  margin-right: 5px;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: solid 1px #bbb;
+}
+
+button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: solid 1px #bbb;
+  background-color: #bbb;
+  color: rgb(0, 0, 0);
+}
+
+button:hover {
+  background-color: rgb(0, 0, 0);
+  color: #bbb;
+}
+
 /* ----------------------------------------------- classes padroes */
+
+h2 {
+  margin: 10px;
+}
+
+.divLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+}
 
 .divCentralizada {
   display: flex;
@@ -53,6 +89,8 @@ footer {
   align-items: center;
   justify-content: center;
   min-height: 50vh;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .containerPrincipal {
@@ -63,4 +101,25 @@ footer {
   padding: 20px;
   margin: 20px;
   border: dotted 1px black;
+}
+
+.containerCadastro,
+.containerLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 20px;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.containerCadastro div,
+.containerLogin div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }

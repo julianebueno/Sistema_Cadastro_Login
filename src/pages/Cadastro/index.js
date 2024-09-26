@@ -53,61 +53,61 @@ class Cadastro extends Component {
   render() {
     return (
       <Layout>
+        <h2>CADASTRO</h2>
         <div className="divCentralizada">
-          <h2>CADASTRO</h2>
-          {/* <form onSubmit={this.gravar}> */}
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={this.state.email}
-              onChange={(e) => this.setState({ email: e.target.value })}
-            />
+          <div className="containerCadastro">
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={this.state.email}
+                onChange={(e) => this.setState({ email: e.target.value })}
+              />
+            </div>
+            <div>
+              <label htmlFor="senha">Senha:</label>
+              <input
+                type="password"
+                id="senha"
+                name="senha"
+                value={this.state.senha}
+                onChange={(e) => this.setState({ senha: e.target.value })}
+              />
+            </div>
+            <div>
+              <label htmlFor="nome">Nome:</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                value={this.state.nome}
+                onChange={(e) => this.setState({ nome: e.target.value })}
+              />
+            </div>
+            <div>
+              <label htmlFor="sobrenome">Sobrenome:</label>
+              <input
+                type="text"
+                id="sobrenome"
+                name="sobrenome"
+                value={this.state.sobrenome}
+                onChange={(e) => this.setState({ sobrenome: e.target.value })}
+              />
+            </div>
+            <div>
+              <label htmlFor="nascimento">Data de Nascimento:</label>
+              <input
+                type="date"
+                id="nascimento"
+                name="nascimento"
+                value={this.state.nascimento}
+                onChange={(e) => this.setState({ nascimento: e.target.value })}
+              />
+            </div>
+            <button onClick={this.gravar}>Cadastrar</button>
           </div>
-          <div>
-            <label htmlFor="senha">Senha:</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              value={this.state.senha}
-              onChange={(e) => this.setState({ senha: e.target.value })}
-            />
-          </div>
-          <div>
-            <label htmlFor="nome">Nome:</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              value={this.state.nome}
-              onChange={(e) => this.setState({ nome: e.target.value })}
-            />
-          </div>
-          <div>
-            <label htmlFor="sobrenome">Sobrenome:</label>
-            <input
-              type="text"
-              id="sobrenome"
-              name="sobrenome"
-              value={this.state.sobrenome}
-              onChange={(e) => this.setState({ sobrenome: e.target.value })}
-            />
-          </div>
-          <div>
-            <label htmlFor="nascimento">Data de Nascimento:</label>
-            <input
-              type="date"
-              id="nascimento"
-              name="nascimento"
-              value={this.state.nascimento}
-              onChange={(e) => this.setState({ nascimento: e.target.value })}
-            />
-          </div>
-          <button onClick={this.gravar}>Cadastrar</button>
-          {/* </form> */}
         </div>
       </Layout>
     );

@@ -33,12 +33,25 @@ class Principal extends Component {
     });
   }
 
+  deslogar() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        alert("Usuário deslogado com sucesso");
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <Layout>
+        <h2>PRINCIPAL</h2>
         <div className="divCentralizada">
-          <h2>PRINCIPAL</h2>
-          <p>Seja bem-vindo(a) à nossa página principal!</p>
+          <p>Seja bem-vindo(a) à página principal!</p>
           <div className="containerPrincipal">
             {this.state.nome &&
               this.state.sobrenome &&
@@ -49,6 +62,7 @@ class Principal extends Component {
                     {this.state.sobrenome}
                   </p>
                   <p>Nascimento: {this.state.nascimento}</p>
+                  <button onClick={this.deslogar}>Deslogar</button>
                 </>
               )}
             {!this.state.nome &&

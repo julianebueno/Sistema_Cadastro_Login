@@ -5,7 +5,7 @@ import Footer from "../shared/Footer";
 class Layout extends Component {
   render() {
     return (
-      <div>
+      <div className="divLayout">
         <Header />
         {this.props.children}
         <Footer />
